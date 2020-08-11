@@ -1,5 +1,5 @@
 //React
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 //Firebase
@@ -9,7 +9,7 @@ import firebase from "../../firebase";
 import Button from "../Button";
 
 //Styles
-import "./style.css";
+import style from "./style.module.scss";
 
 const Profile = () => {
   const [isActive, setActive] = useState(false);
@@ -39,11 +39,7 @@ const Profile = () => {
 
   return (
     <section>
-      {isActive ? (
-        <h1 className="title">Tu perfil</h1>
-      ) : (
-        <h1 className="title">Desconectado</h1>
-      )}
+      {isActive ? <h1>My profile</h1> : <h1>Disconnected</h1>}
       {isActive ? (
         <DataUser data={data} event={LogoutUser} />
       ) : (
@@ -55,15 +51,15 @@ const Profile = () => {
 
 function DataUser({ data, event }) {
   return (
-    <div className="card">
+    <div className={style.card}>
       <img
-        className="card__image"
+        className={style.card__image}
         src={data.photoURL}
         alt={`Foto de perfil de ${data.displayName}`}
       ></img>
-      <h2 className="card__title">{data.displayName}</h2>
-      <p className="card__email">{data.email}</p>
-      <Button buttonValue={"Logout"} eventClick={event} />
+      <h2 className={style.card__title}>{data.displayName}</h2>
+      <p>{data.email}</p>
+      <Button variant={style.blue} buttonValue={"Logout"} eventClick={event} />
     </div>
   );
 }
@@ -71,8 +67,8 @@ function DataUser({ data, event }) {
 function UserDisconnected() {
   return (
     <div>
-      <p>Porfavor, logeate a nuestra plataforma.</p>
-      <Link to="/">Volver Atras</Link>
+      <p>Please, login to our platform.</p>
+      <Link to="/">Go back</Link>
     </div>
   );
 }
