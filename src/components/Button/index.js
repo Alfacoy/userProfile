@@ -1,14 +1,15 @@
 import React from "react";
-import "./style.css";
+import style from "./style.module.scss";
 
-const Button = ({ buttonValue, eventClick }) => {
+const Button = ({ buttonValue, eventClick, variant }) => {
   return (
-    <input
-      className="btn"
-      type="button"
+    <button
+      className={`${style.btn} ${variant}`}
       value={buttonValue}
       onClick={eventClick}
-    />
+    >
+      {buttonValue}
+    </button>
   );
 };
 
